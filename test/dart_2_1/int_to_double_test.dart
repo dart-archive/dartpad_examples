@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license
 // that can be found in the LICENSE file.
 
-@Skip('Enable when 2.1.0-dev.7.0 is released - dart-lang/dartpad_examples#6')
-
 import 'package:dartpad_examples/dart_2_1/int_to_double.dart' as example;
 import 'package:test/test.dart';
 
