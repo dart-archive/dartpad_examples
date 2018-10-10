@@ -1,7 +1,7 @@
 name: dartpad_examples
 
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.1.0-dev.7 <3.0.0'
 
 dev_dependencies:
   pedantic: ^1.0.0
