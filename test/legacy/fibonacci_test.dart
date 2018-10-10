@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('output', () {
-    expect(() => example.main(), prints(r'''
+    expect(example.main, prints(r'''
 fibonacci(20) = 6765
 '''));
   });

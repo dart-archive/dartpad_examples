@@ -6,7 +6,7 @@
 //# https://dartpad.dartlang.org/74e990d984faad26dea0
 
 void main() {
-  int i = 20;
+  var i = 20;
   print('fibonacci($i) = ${fibonacci(i)}');
 }
 

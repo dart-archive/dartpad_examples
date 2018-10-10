@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('output', () {
-    expect(() => example.main(), prints(r'''
+    expect(example.main, prints(r'''
 hello 0
 hello 1
 hello 2
