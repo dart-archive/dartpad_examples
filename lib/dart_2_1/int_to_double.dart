@@ -5,7 +5,7 @@
 class Size {
   final double width, height;
 
-  const Size(this.width, this.height);
+  Size(this.width, this.height);
 
   @override
   String toString() => '{$width, $height}';

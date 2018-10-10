@@ -6,7 +6,7 @@
 //# https://dartpad.dartlang.org/33706e19df021e52d98c
 
 void main() {
-  for (int i = 0; i < 4; i++) {
-    print('hello ${i}');
+  for (var i = 0; i < 4; i++) {
+    print('hello $i');
   }
 }
