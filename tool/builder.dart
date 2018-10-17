@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:convert' show htmlEscape;
+import 'dart:convert' show HtmlEscape, HtmlEscapeMode;
 
 import 'package:build/build.dart';
 import 'package:glob/glob.dart';
@@ -18,21 +18,19 @@ class _ExampleWebBuilder implements Builder {
   Future<void> build(BuildStep buildStep) async {
     var source = await buildStep.readAsString(buildStep.inputId);
 
-    var hasCss =
-        await buildStep.canRead(buildStep.inputId.changeExtension('.css'));
-
     var htmlAsset = buildStep.inputId.changeExtension('.html_snippet');
     String snippetContent;
     if (await buildStep.canRead(htmlAsset)) {
       snippetContent = await buildStep.readAsString(htmlAsset);
     }
 
-    var sampleName = p.basenameWithoutExtension(buildStep.inputId.path);
-
     await buildStep.writeAsString(
         buildStep.inputId.changeExtension('.html'),
         _template(
-            sampleName, hasCss, source, snippetContent ?? 'Open console...'));
+            p.basenameWithoutExtension(buildStep.inputId.path),
+            await buildStep.canRead(buildStep.inputId.changeExtension('.css')),
+            const HtmlEscape(HtmlEscapeMode.element).convert(source),
+            snippetContent ?? 'Open console...'));
   }
 
   @override
