@@ -7,10 +7,8 @@
 
 import 'dart:html';
 
-const echoUrl = 'wss://echo.websocket.org';
-
 void main() {
-  WebSocketTest wsTest = new WebSocketTest(echoUrl);
+  var wsTest = WebSocketTest('wss://echo.websocket.org');
 
   InputElement input = querySelector('input');
   input.onChange.listen((_) {
@@ -20,19 +18,18 @@ void main() {
 }
 
 class WebSocketTest {
-  WebSocket _socket;
-  Stopwatch _timer;
+  final WebSocket _socket;
+  final _timer = Stopwatch()..start();
 
-  WebSocketTest(String url) {
-    print("Connecting to ${url}…");
-    _socket = new WebSocket(url);
+  WebSocketTest(String url) : _socket = WebSocket(url) {
+    print('Connecting to $url...');
     _startListening();
   }
 
   void send(String value) {
-    print('==> ${value}');
+    print('==> $value');
     _socket.send(value);
-    _timer = new Stopwatch()..start();
+    _timer.reset();
   }
 
   void _startListening() {
@@ -42,9 +39,9 @@ class WebSocketTest {
     });
 
     _socket.onClose.listen((_) => print('Websocket closed.'));
-    _socket.onError.listen((_) => print("Error opening connection."));
+    _socket.onError.listen((_) => print('Error opening connection.'));
 
-    _socket.onMessage.listen((MessageEvent e) {
+    _socket.onMessage.listen((e) {
       print('<== ${e.data} [${_timer.elapsedMilliseconds}ms]');
     });
   }
