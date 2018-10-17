@@ -5,69 +5,65 @@
 //# Captured on 2018-10-17
 //# https://dartpad.dartlang.org/49bde0c1ed780decc902f3d4d06d8f0c
 
-library sunflower;
-
 import 'dart:html';
 import 'dart:math' as math;
 
 void main() {
-  new Sunflower();
+  Sunflower();
 }
 
 class Sunflower {
-  static const String ORANGE = "orange";
+  static const orange = 'orange';
+  static const seedRadius = 2;
+  static const scaleFactor = 4;
+  static const tau = math.pi * 2;
+  static const maxD = 300;
 
-  static const SEED_RADIUS = 2;
-  static const SCALE_FACTOR = 4;
-  static const TAU = math.pi * 2;
-  static const MAX_D = 300;
+  static final phi = (math.sqrt(5) + 1) / 2;
+  static final center = maxD / 2;
 
-  CanvasRenderingContext2D ctx;
-  num xc, yc;
-  num seeds = 0;
-  num PHI;
+  final context = (querySelector('#canvas') as CanvasElement).context2D;
+
+  int seeds;
 
   Sunflower() {
-    PHI = (math.sqrt(5) + 1) / 2;
+    InputElement slider = querySelector('#slider');
 
-    CanvasElement canvas = querySelector("#canvas");
-    xc = yc = MAX_D / 2;
-    ctx = canvas.getContext("2d");
-
-    InputElement slider = querySelector("#slider");
-    slider.onChange.listen((Event e) {
+    void update() {
       seeds = int.parse(slider.value);
       drawFrame();
-    });
+    }
 
-    seeds = int.parse(slider.value);
-    drawFrame();
+    slider.onChange.listen((_) => update());
+
+    update();
   }
 
   // Draw the complete figure for the current number of seeds.
   void drawFrame() {
-    print('seed value = ${seeds}');
+    print('seed value = $seeds');
 
-    ctx.clearRect(0, 0, MAX_D, MAX_D);
+    context.clearRect(0, 0, maxD, maxD);
 
     for (var i = 0; i < seeds; i++) {
-      var theta = i * TAU / PHI;
-      var r = math.sqrt(i) * SCALE_FACTOR;
-      var x = xc + r * math.cos(theta);
-      var y = yc - r * math.sin(theta);
+      var theta = i * tau / phi;
+      var r = math.sqrt(i) * scaleFactor;
+      var x = center + r * math.cos(theta);
+      var y = center - r * math.sin(theta);
       drawSeed(x, y);
     }
   }
 
   // Draw a small circle representing a seed centered at (x,y).
   void drawSeed(num x, num y) {
-    ctx.beginPath();
-    ctx.lineWidth = 2;
-    ctx.fillStyle = ORANGE;
-    ctx.strokeStyle = ORANGE;
-    ctx.arc(x, y, SEED_RADIUS, 0, TAU, false);
-    ctx.fill();
-    ctx.closePath();
-    ctx.stroke();
+    context
+      ..beginPath()
+      ..lineWidth = 2
+      ..fillStyle = orange
+      ..strokeStyle = orange
+      ..arc(x, y, seedRadius, 0, tau, false)
+      ..fill()
+      ..closePath()
+      ..stroke();
   }
 }
