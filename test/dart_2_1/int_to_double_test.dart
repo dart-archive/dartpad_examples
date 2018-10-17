@@ -12,12 +12,14 @@ void main() {
     if (identical(1, 1.0)) {
       // javascript
       expectedOutput = r'''
-{0, 0}
+{2, 4}
+{2, 4}
 ''';
     } else {
       // vm
       expectedOutput = r'''
-{0.0, 0.0}
+{2.0, 4.0}
+{2.0, 4.0}
 ''';
     }
 
