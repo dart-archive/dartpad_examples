@@ -2,8 +2,9 @@
 // Use of this source code is governed by a BSD-style license
 // that can be found in the LICENSE file.
 
-import 'package:dartpad_examples/dart_2_1/new_mixin_syntax.dart' as example;
 import 'package:test/test.dart';
+
+import '../../example/dart_2_1/new_mixin_syntax.dart' as example;
 
 void main() {
   test('output', () {

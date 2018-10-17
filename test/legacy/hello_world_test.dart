@@ -2,8 +2,9 @@
 // Use of this source code is governed by a BSD-style license
 // that can be found in the LICENSE file.
 
-import 'package:dartpad_examples/legacy/hello_world.dart' as example;
 import 'package:test/test.dart';
+
+import '../../example/legacy/hello_world.dart' as example;
 
 void main() {
   test('output', () {
