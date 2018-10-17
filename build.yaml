@@ -1,0 +1,18 @@
+# Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+
+builders:
+  example_builder:
+    import: "tool/builder.dart"
+    builder_factories: ["exampleWebBuilder"]
+    build_extensions: {".dart": ["*.html"]}
+    build_to: cache
+    auto_apply: root_package
+    defaults:
+      generate_for: ['example/**/*.dart']
+
+  root_builder:
+    import: "tool/builder.dart"
+    builder_factories: ["exampleRootBuilder"]
+    build_extensions: {"test/$test$": ["example/index.html"]}
+    build_to: cache
+    auto_apply: root_package
