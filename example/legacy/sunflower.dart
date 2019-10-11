@@ -34,7 +34,7 @@ class Sunflower {
       drawFrame();
     }
 
-    slider.onChange.listen((_) => update());
+    slider.onInput.listen((_) => update());
 
     update();
   }
