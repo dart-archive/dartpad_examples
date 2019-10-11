@@ -6,6 +6,4 @@
 
 <br>
 
-<p>Enter text to echo:</p>
-
-<input type="text">
+<p>Enter text to echo: <input type="text"> </p>
